@@ -33,11 +33,11 @@ func TestRollDice(t *testing.T) {
 	c.Add("c", 30)
 	c.Add("d", 40)
 	itvl, err := c.RollDice()
-	fmt.Println(itvl.GetId())
+	fmt.Println(itvl)
 	if err != nil {
 		t.Error("Something goes wrong" + err.Error())
 	}
-	if itvl == nil {
+	if itvl == "" {
 		t.Error("Something goes wrong" + err.Error())
 	}
 }
