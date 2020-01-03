@@ -41,3 +41,16 @@ func TestRollDice(t *testing.T) {
 		t.Error("Something goes wrong" + err.Error())
 	}
 }
+
+func TestFree(t *testing.T) {
+	c := New()
+	c.Add("a", 10)
+	c.Add("b", 20)
+	c.Add("c", 30)
+	c.Add("d", 40)
+	c.Reset()
+	_, err := c.RollDice()
+	if err == nil {
+		t.Error("Picker should return an error" + err.Error())
+	}
+}
