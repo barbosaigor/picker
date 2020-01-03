@@ -13,7 +13,7 @@ import (
 // store a range element
 type interval struct {
 	// min, max is an interval
-	min, max int
+	min, max uint32
 	// id identifier
 	id string
 }
@@ -21,28 +21,28 @@ type interval struct {
 type container struct {
 	intervals []interval
 	// Sum of intervals value
-	sum int
+	sum uint32
 }
 
 func New() *container {
 	return new(container)
 }
 
-func createInterval(id string, min, max int) interval {
+func createInterval(id string, min, max uint32) interval {
 	return interval{min, max, id}
 }
 
 // randNum Take a random number between 0 and maxNumber
-func randNum(maxNumber int) int {
+func randNum(maxNumber uint32) uint32 {
 	randSource := rand.NewSource(time.Now().UnixNano())
 	randEngine := rand.New(randSource)
-	randNumber := randEngine.Intn(maxNumber)
-	return randNumber
+	randNumber := randEngine.Intn(int(maxNumber))
+	return uint32(randNumber)
 }
 
 // Add adds an element that has
 // a range in the choosen scope
-func (c *container) Add(id string, value int) {
+func (c *container) Add(id string, value uint32) {
 	itrvl := createInterval(id, c.sum, c.sum + value - 1)
 	c.intervals = append(c.intervals, itrvl)
 	c.sum += value
