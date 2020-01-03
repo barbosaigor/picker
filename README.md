@@ -1,5 +1,5 @@
 # Picker
-Picker is a package that randomly picks an element based on its weight
+Picker is a package that randomly picks an element based on its weight. Higher weight elements are more likely to be choosen.
 
 ## Documentation
 
