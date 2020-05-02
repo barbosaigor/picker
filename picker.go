@@ -1,15 +1,12 @@
-// picker is a packaged that randomly
-// chooses an element based on its
-// weight.
 package picker
 
 import (
+	"errors"
 	"math/rand"
 	"time"
-	"errors"
 )
 
-// interval is used for 
+// interval is used for
 // store a range element
 type interval struct {
 	// min, max is an interval
@@ -18,14 +15,16 @@ type interval struct {
 	id string
 }
 
-type container struct {
+// Picker manages elements and implements the selection algorithm
+type Picker struct {
 	intervals []interval
 	// Sum of intervals value
 	sum uint32
 }
 
-func New() *container {
-	return new(container)
+// New creates a picker
+func New() *Picker {
+	return new(Picker)
 }
 
 func createInterval(id string, min, max uint32) interval {
@@ -40,17 +39,15 @@ func randNum(maxNumber uint32) uint32 {
 	return uint32(randNumber)
 }
 
-// Add adds an element that has
-// a range in the choosen scope
-func (c *container) Add(id string, value uint32) {
-	itrvl := createInterval(id, c.sum, c.sum + value - 1)
+// Add attaches an element
+func (c *Picker) Add(id string, value uint32) {
+	itrvl := createInterval(id, c.sum, c.sum+value-1)
 	c.intervals = append(c.intervals, itrvl)
 	c.sum += value
 }
 
-// RollDice picks an element 
-// that satisfies some range
-func (c container) RollDice() (string, error) {
+// RollDice selects a random element taking into account each element probability
+func (c Picker) RollDice() (string, error) {
 	if c.sum == 0 {
 		return "", errors.New("No interval attached")
 	}
@@ -63,9 +60,8 @@ func (c container) RollDice() (string, error) {
 	return "", errors.New("No interval found")
 }
 
-// Reset resets picker
-// variables
-func (c *container) Reset() {
+// Reset cleans picker variables
+func (c *Picker) Reset() {
 	c.intervals = nil
 	c.sum = 0
 }
