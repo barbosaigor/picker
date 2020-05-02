@@ -1,10 +1,10 @@
 # Picker
-Picker is a package that randomly picks an element based on its weight. Higher weight elements are more likely to be choosen.
+Picker implements an algorithm that randomly selects an element, taking into account each element probability. 
+Higher weight elements are more likely to be choosen.
 
 ## Documentation
 
-**Add** an element to picker
-
+**Add** attaches an element. 
 
 | Element | Weight |
 | ------------- | -------------:|
@@ -20,7 +20,7 @@ p.Add("b", 90)
 p.Add("c", 10)
 ```
 
-**Roll Dice** selects an element based on its probability of being taken. 
+**Roll Dice** selects a random element taking into account each element probability. 
 Higher weight elements are more likely to be choosen.
 
 ```golang
@@ -31,7 +31,7 @@ p.Add("c", 10)
 element, err := p.RollDice()
 ```
 
-**Reset** reset all variables of picker
+**Reset** removes all elements and resets picker variables. 
 
 ```golang
 p.Reset()
